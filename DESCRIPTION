@@ -1,0 +1,24 @@
+Package: causalplot
+Type: Package
+Title: Create Causal Diagrams Using A Simple Convencience Function
+Version: 0.1.0
+Authors@R: c(
+  person(given = "Sebastian", family = "van Baalen", 
+  email = "sebastian.van-baalen@pcr.uu.se", 
+  role = c("aut", "cre", "cph"),
+  comment = c(ORCID = "0000-0003-3098-5587"))
+  )
+Maintainer: Sebastian van Baalen <sebastian.van-baalen@pcr.uu.se>
+Description: Creates publication-ready causal diagrams using 'ggplot2'.
+  Provides simple templates for common causal diagrams (e.g., mediating 
+  mechanisms and parallel pathways) with customizable labels, colors, 
+  fonts, and export-friendly defaults.
+License: CC BY 4.0 + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports: 
+    ggforce,
+    ggplot2,
+    ggtext

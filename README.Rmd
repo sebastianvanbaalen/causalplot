@@ -7,19 +7,21 @@ output: github_document
 ```{r, include = FALSE}
 devtools::load_all()
 
-
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/logo.png",
-  out.width = "100%"
+  fig.path   = "man/figures/",
+  dpi        = 600,
+  fig.width  = 12,
+  fig.height = 4,
+  fig.align  = "center",
+  out.width  = "100%"
 )
 ```
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-
-# causalplot <a href="#"><img src="man/figures/logo.png" align="right" height="300" style="margin-left:5px; margin-bottom:5px;"/></a>
+# causalplot <a href="#"><img src="man/figures/logo.png" align="right" height="200" style="margin-left:5px; margin-bottom:5px;"/></a>
 
 <!-- badges: start -->
 
@@ -36,18 +38,6 @@ You can install the development version of `causalplot` from Github with:
 # devtools::install_github("sebastianvanbaalen/causalplot")
 ```
 
-```{r setup, include=FALSE}
-devtools::load_all()
-
-knitr::opts_chunk$set(
-  dpi = 600,
-  fig.width  = 12,
-  fig.height = 4,
-  fig.align  = "center",
-  out.width  = "100%"
-)
-```
-
 ## Bug-reports and suggestions?
 
 Are you missing a template or is something not running as it should? Submit a report through Github or email Sebastian at sebastian.van-baalen\@pcr.uu.se.
@@ -56,7 +46,7 @@ Are you missing a template or is something not running as it should? Submit a re
 
 Making a causal diagram using `causalplot` is easy. All you need is an idea, your variable names, and labels for your causal mechanisms or causal process steps. Use the `type` argument to chose between different templates in the plot gallery. Below is the code for making the simplest plot consisting only of three boxes: one for the independent variable, one for the dependent variable, and one for the causal mechanism.
 
-```{r}
+```{r example}
 causal_plot(
   type = "111",
   labels = c(
@@ -76,7 +66,7 @@ causal_plot(
 
 A simple one-step causal mechanism plot with an independent variable, dependent variable, and one causal mechanism box.
 
-```{r}
+```{r example-111}
 causal_plot(
   type = "111", # Chose the plot template
   text_size = 3, # Set the text size
@@ -88,7 +78,7 @@ causal_plot(
 
 A two-step causal mechanism plot with an independent variable, dependent variable, and two causal process boxes.
 
-```{r}
+```{r example-1111}
 causal_plot(
   type = "1111", 
   text_size = 4,
@@ -97,25 +87,53 @@ causal_plot(
 )
 ```
 
+### Three-step causal mechanism
+
+A three-step causal mechanism plot with an independent variable, dependent variable, and three causal process boxes.
+
+```{r example 11111}
+causal_plot(
+  type = "11111",
+  text_size = 4
+)
+```
+
 ### Dual-pathway causal mechanism
 
 A two-step causal mechanism plot with an independent variable, dependent variable, and two separate causal pathways.
 
-```{r}
+```{r example-1221}
 causal_plot(
   type = "1221", 
+  labels = c(
+    "Independent variable",
+    "Path 1: mechanism step 1",
+    "Path 2: mechanism step 1",
+    "Path 1: mechanism step 2",
+    "Path 2: mechanism step 2",
+    "Dependent variable"
+  ),
   wrap_width = 17,
   text_size = 4,
-  fill_mechanisms = "#00A08A",
+  fill_mechanisms = "black",
+  fill_variables = "black",
+  text_color = "white",
   font = "Times" # Set the font
 )
 ```
 
 ### Dual-pathway causal mechanism with joint first step
 
-```{r}
+```{r example-1121}
 causal_plot(
   type = "1121", 
+  labels = c(
+    "Independent variable",
+    "Shared mechanism step 1",
+    "Path 1: mechanism step 2",
+    "Path 2: mechanism step 2",
+    "Dependent variable"
+  ),
   wrap_width = 17,
   text_size = 4,
   fill_variables = "grey50", # Set the color for the variable boxes
@@ -125,9 +143,16 @@ causal_plot(
 
 ### Dual-pathway causal mechanism with joint second step
 
-```{r}
+```{r example-1211}
 causal_plot(
   type = "1211", 
+  labels = c(
+    "Independent variable",
+    "Path 1: mechanism step 1",
+    "Path 2: mechanism step 1",
+    "Shared mechanism step 2",
+    "Dependent variable"
+  ),
   wrap_width = 17,
   text_size = 4,
   fill_variables = "#59C7EB",
@@ -139,7 +164,7 @@ causal_plot(
 
 The classic "bathtub" visualization of a causal relationship (for instance, discussed [here](https://doi.org/10.1146/annurev.soc.012809.102632)) with a direct macro-level arrow and a two-step causal mechanism.
 
-```{r}
+```{r example-bathtub}
 causal_plot(
   type = "bathtub",
   text_size = 4,
@@ -148,11 +173,45 @@ causal_plot(
 )
 ```
 
+### One-step causal mechanism with moderator
+
+A one-step causal mechanism plot with an independent variable, dependent variable, one causal mechanism box, and a moderator variable.
+
+```{r example-111-moderator}
+causal_plot(
+  type = "111_moderator",
+  labels = c(
+    "Independent variable",
+    "Causal mechanism",
+    "Dependent variable",
+    "Moderator variable"
+  ),
+  text_size = 4
+)
+```
+
+### One-step causal mechanism with confounder
+
+A one-step causal mechanism plot with an independent variable, dependent variable, one causal mechanism box, and a confounding variable.
+
+```{r example-111-confounder}
+causal_plot(
+  type = "111_confounder",
+  labels = c(
+    "Independent variable",
+    "Causal mechanism",
+    "Dependent variable",
+    "Confounding variable"
+  ),
+  text_size = 4
+)
+```
+
 ## Save your plot
 
 `causalplot` uses `ggplot2` to generate the plots, so they can be saved using the `ggsave` command.
 
-```{r}
+```{r eval=FALSE}
 ggplot2::ggsave("man/figures/causal_plot.png", height = 5, width = 12)
 ```
 

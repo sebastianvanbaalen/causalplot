@@ -4,7 +4,7 @@
 [![License: CC BY
 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-# causalplot <a href="#"><img src="man/figures/logo.png" align="right" height="300" style="margin-left:5px; margin-bottom:5px;"/></a>
+# causalplot <a href="#"><img src="man/figures/logo.png" align="right" height="200" style="margin-left:5px; margin-bottom:5px;"/></a>
 
 <!-- badges: start -->
 
@@ -57,7 +57,7 @@ causal_plot(
 )
 ```
 
-<img src="man/figures/logo.pngunnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/example-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Gallery
 
@@ -80,7 +80,7 @@ causal_plot(
 )
 ```
 
-<img src="man/figures/logo.pngunnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/example-111-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Two-step causal mechanism
 
@@ -96,7 +96,21 @@ causal_plot(
 )
 ```
 
-<img src="man/figures/logo.pngunnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/example-1111-1.png" width="100%" style="display: block; margin: auto;" />
+
+### Three-step causal mechanism
+
+A three-step causal mechanism plot with an independent variable,
+dependent variable, and three causal process boxes.
+
+``` r
+causal_plot(
+  type = "11111",
+  text_size = 4
+)
+```
+
+<img src="man/figures/example 11111-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Dual-pathway causal mechanism
 
@@ -106,20 +120,37 @@ variable, and two separate causal pathways.
 ``` r
 causal_plot(
   type = "1221", 
+  labels = c(
+    "Independent variable",
+    "Path 1: mechanism step 1",
+    "Path 2: mechanism step 1",
+    "Path 1: mechanism step 2",
+    "Path 2: mechanism step 2",
+    "Dependent variable"
+  ),
   wrap_width = 17,
   text_size = 4,
-  fill_mechanisms = "#00A08A",
+  fill_mechanisms = "black",
+  fill_variables = "black",
+  text_color = "white",
   font = "Times" # Set the font
 )
 ```
 
-<img src="man/figures/logo.pngunnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/example-1221-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Dual-pathway causal mechanism with joint first step
 
 ``` r
 causal_plot(
   type = "1121", 
+  labels = c(
+    "Independent variable",
+    "Shared mechanism step 1",
+    "Path 1: mechanism step 2",
+    "Path 2: mechanism step 2",
+    "Dependent variable"
+  ),
   wrap_width = 17,
   text_size = 4,
   fill_variables = "grey50", # Set the color for the variable boxes
@@ -127,13 +158,20 @@ causal_plot(
 )
 ```
 
-<img src="man/figures/logo.pngunnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/example-1121-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Dual-pathway causal mechanism with joint second step
 
 ``` r
 causal_plot(
   type = "1211", 
+  labels = c(
+    "Independent variable",
+    "Path 1: mechanism step 1",
+    "Path 2: mechanism step 1",
+    "Shared mechanism step 2",
+    "Dependent variable"
+  ),
   wrap_width = 17,
   text_size = 4,
   fill_variables = "#59C7EB",
@@ -141,7 +179,7 @@ causal_plot(
 )
 ```
 
-<img src="man/figures/logo.pngunnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/example-1211-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### The classic “bathtub” causal mechanism
 
@@ -159,7 +197,47 @@ causal_plot(
 )
 ```
 
-<img src="man/figures/logo.pngunnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/example-bathtub-1.png" width="100%" style="display: block; margin: auto;" />
+
+### One-step causal mechanism with moderator
+
+A one-step causal mechanism plot with an independent variable, dependent
+variable, one causal mechanism box, and a moderator variable.
+
+``` r
+causal_plot(
+  type = "111_moderator",
+  labels = c(
+    "Independent variable",
+    "Causal mechanism",
+    "Dependent variable",
+    "Moderator variable"
+  ),
+  text_size = 4
+)
+```
+
+<img src="man/figures/example-111-moderator-1.png" width="100%" style="display: block; margin: auto;" />
+
+### One-step causal mechanism with confounder
+
+A one-step causal mechanism plot with an independent variable, dependent
+variable, one causal mechanism box, and a confounding variable.
+
+``` r
+causal_plot(
+  type = "111_confounder",
+  labels = c(
+    "Independent variable",
+    "Causal mechanism",
+    "Dependent variable",
+    "Confounding variable"
+  ),
+  text_size = 4
+)
+```
+
+<img src="man/figures/example-111-confounder-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Save your plot
 

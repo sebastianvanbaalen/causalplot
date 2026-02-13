@@ -17,8 +17,8 @@ causal_plot(
   arrow_length = grid::unit(3, "mm"),
   arrow_linewidth = 0.6,
   box_ratio = 0.8,
-  xlim = c(0, 13),
-  ylim = c(0, 6)
+  xlim = NULL,
+  ylim = NULL
 )
 }
 \arguments{
@@ -46,9 +46,9 @@ causal_plot(
 
 \item{box_ratio}{Numeric. Passed to coord_fixed(ratio = box_ratio). Default 0.8.}
 
-\item{xlim}{Numeric vector length 2.}
+\item{xlim}{Numeric vector of length 2, or NULL for auto-computed limits.}
 
-\item{ylim}{Numeric vector length 2.}
+\item{ylim}{Numeric vector of length 2, or NULL for auto-computed limits.}
 }
 \value{
 A ggplot object.
@@ -59,12 +59,18 @@ Draw a simple causal diagram using ggplot2, with rounded boxes and arrows.
 \details{
 Supported templates:
 \itemize{
-\item "1111": IV -> mech1 -> mech2 -> DV (4 boxes)
 \item "111" : IV -> mech -> DV (3 boxes)
+\item "1111": IV -> mech1 -> mech2 -> DV (4 boxes)
+\item "11111": IV -> mech1 -> mech2 -> mech3 -> DV (4 boxes)
 \item "1121": IV -> one box -> two boxes -> DV (5 boxes)
 \item "1211": IV (center) -> two boxes -> one box -> DV (5 boxes)
 \item "1221": IV (center) -> two parallel paths -> DV (center) (6 boxes)
 \item "bathtub": like "1221" but only bottom path + dashed direct IV->DV (4 boxes)
+\item "111_moderator": like "111" but with a moderator variable
+\item "111_confounder": like "111" but with a confounder variable
+\item "211" : two IVs -> shared mechanism -> DV (4 boxes)
+\item "221" : two IVs -> two parallel mechanisms -> DV (5 boxes)
+\item "2221": two IVs -> two parallel mechanism steps -> DV (7 boxes)
 }
 
 Labels are wrapped to a maximum of 3 lines. If a label would wrap to more than

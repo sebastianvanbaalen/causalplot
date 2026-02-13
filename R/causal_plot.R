@@ -11,7 +11,10 @@
 #' - "1221": IV (center) -> two parallel paths -> DV (center) (6 boxes)
 #' - "bathtub": like "1221" but only bottom path + dashed direct IV->DV (4 boxes)
 #' - "111_moderator": like "111" but with a moderator variable
-#' - "111_confounder": like "111" but with a moderator variable
+#' - "111_confounder": like "111" but with a confounder variable
+#' - "211" : two IVs -> shared mechanism -> DV (4 boxes)
+#' - "221" : two IVs -> two parallel mechanisms -> DV (5 boxes)
+#' - "2221": two IVs -> two parallel mechanism steps -> DV (7 boxes)
 #'
 #' Labels are wrapped to a maximum of 3 lines. If a label would wrap to more than
 #' 3 lines (given `wrap_width`), an error is thrown.
@@ -28,8 +31,8 @@
 #' @param arrow_length grid::unit for arrowhead size.
 #' @param arrow_linewidth Numeric line width for arrows.
 #' @param box_ratio Numeric. Passed to coord_fixed(ratio = box_ratio). Default 0.8.
-#' @param xlim Numeric vector length 2.
-#' @param ylim Numeric vector length 2.
+#' @param xlim Numeric vector of length 2, or NULL for auto-computed limits.
+#' @param ylim Numeric vector of length 2, or NULL for auto-computed limits.
 #'
 #' @return A ggplot object.
 #' @export
@@ -46,14 +49,14 @@ causal_plot <- function(
     arrow_length = grid::unit(3, "mm"),
     arrow_linewidth = 0.6,
     box_ratio = 0.8,
-    xlim = c(0, 13),
-    ylim = c(0, 6)
+    xlim = NULL,
+    ylim = NULL
 ) {
   if (!is.character(type) || length(type) != 1) {
     stop("`type` must be a single string (e.g., '1111').", call. = FALSE)
   }
 
-  supported <- c("111", "1111", "1121", "1211", "1221", "bathtub", "11111", "111_moderator", "111_confounder")
+  supported <- c("111", "1111", "1121", "1211", "1221", "bathtub", "11111", "111_moderator", "111_confounder", "211", "221", "2221")
   if (!type %in% supported) {
     stop(
       sprintf(
@@ -129,6 +132,28 @@ causal_plot <- function(
         "Causal mechanism",
         "Dependent variable",
         "Confounder"
+      ),
+      "211" = c(
+        "IV 1",
+        "IV 2",
+        "Shared mechanism",
+        "Dependent variable"
+      ),
+      "221" = c(
+        "IV 1",
+        "IV 2",
+        "Path 1: mechanism",
+        "Path 2: mechanism",
+        "Dependent variable"
+      ),
+      "2221" = c(
+        "IV 1",
+        "IV 2",
+        "Path 1: mechanism step 1",
+        "Path 2: mechanism step 1",
+        "Path 1: mechanism step 2",
+        "Path 2: mechanism step 2",
+        "Dependent variable"
       )
     )
   }
@@ -143,7 +168,10 @@ causal_plot <- function(
     "1221" = 6L,
     "bathtub" = 4L,
     "111_moderator" = 4L,
-    "111_confounder" = 4L
+    "111_confounder" = 4L,
+    "211" = 4L,
+    "221" = 5L,
+    "2221" = 7L
   )
 
   if (length(labels) != required_n) {
@@ -300,6 +328,60 @@ causal_plot <- function(
 
   if (type == "111_confounder") {
     return(.causal_template_111_confounder(
+      labels = labels,
+      fill_variables = fill_variables,
+      fill_mechanisms = fill_mechanisms,
+      corner_radius = corner_radius,
+      font = font,
+      text_size = text_size,
+      text_color = text_color,
+      wrap_width = wrap_width,
+      arrow_length = arrow_length,
+      arrow_linewidth = arrow_linewidth,
+      box_ratio = box_ratio,
+      xlim = xlim,
+      ylim = ylim
+    ))
+  }
+
+  if (type == "211") {
+    return(.causal_template_211(
+      labels = labels,
+      fill_variables = fill_variables,
+      fill_mechanisms = fill_mechanisms,
+      corner_radius = corner_radius,
+      font = font,
+      text_size = text_size,
+      text_color = text_color,
+      wrap_width = wrap_width,
+      arrow_length = arrow_length,
+      arrow_linewidth = arrow_linewidth,
+      box_ratio = box_ratio,
+      xlim = xlim,
+      ylim = ylim
+    ))
+  }
+
+  if (type == "221") {
+    return(.causal_template_221(
+      labels = labels,
+      fill_variables = fill_variables,
+      fill_mechanisms = fill_mechanisms,
+      corner_radius = corner_radius,
+      font = font,
+      text_size = text_size,
+      text_color = text_color,
+      wrap_width = wrap_width,
+      arrow_length = arrow_length,
+      arrow_linewidth = arrow_linewidth,
+      box_ratio = box_ratio,
+      xlim = xlim,
+      ylim = ylim
+    ))
+  }
+
+  if (type == "2221") {
+    return(.causal_template_2221(
       labels = labels,
       fill_variables = fill_variables,
       fill_mechanisms = fill_mechanisms,

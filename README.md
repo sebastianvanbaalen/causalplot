@@ -3,6 +3,7 @@
 
 [![License: CC BY
 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![Stars](https://img.shields.io/github/stars/sebastianvanbaalen/causalplot)](https://github.com/sebastianvanbaalen/causalplot)
 
 # causalplot <a href="#"><img src="man/figures/logo.png" align="right" height="200" style="margin-left:5px; margin-bottom:5px;"/></a>
 
@@ -30,10 +31,22 @@ with:
 # devtools::install_github("sebastianvanbaalen/causalplot")
 ```
 
+## What’s new?
+
+The latest version of `causalplot` includes several new features and
+fixes:
+
+- Reduction of white space around the plots.
+
+- Support for causal plots with two independent variables (templates
+  `211`, `221`, and `2221`).
+
+- Support for the standard 2x2 descriptive or explanatory typology.
+
 ## Bug-reports and suggestions?
 
 Are you missing a template or is something not running as it should?
-Submit a report through Github or email Sebastian at
+Make a new issue in the Github repository or email Sebastian at
 sebastian.van-baalen@pcr.uu.se.
 
 ## Example
@@ -75,7 +88,7 @@ dependent variable, and one causal mechanism box.
 ``` r
 causal_plot(
   type = "111", # Chose the plot template
-  text_size = 3, # Set the text size
+  text_size = 5, # Set the text size
   box_ratio = 1 # Increase the box height
 )
 ```
@@ -183,10 +196,9 @@ causal_plot(
 
 ### The classic “bathtub” causal mechanism
 
-The classic “bathtub” visualization of a causal relationship (for
-instance, discussed
-[here](https://doi.org/10.1146/annurev.soc.012809.102632)) with a direct
-macro-level arrow and a two-step causal mechanism.
+The classic “bathtub” visualization of a causal relationship as
+discussed in Hedström and Ylikoski (2010), with a direct macro-level
+arrow and a two-step causal mechanism.
 
 ``` r
 causal_plot(
@@ -239,6 +251,103 @@ causal_plot(
 
 <img src="man/figures/example-111-confounder-1.png" width="100%" style="display: block; margin: auto;" />
 
+### Two independent variables with shared mechanism
+
+A causal diagram with two independent variables that converge on a
+shared causal mechanism before producing a single outcome. A “+” sign
+indicates that both IVs are necessary.
+
+``` r
+causal_plot(
+  type = "211",
+  labels = c(
+    "Resource scarcity",
+    "Civilian dependence",
+    "Institutional adaptation",
+    "Responsive governance"
+  ),
+  text_size = 4,
+  wrap_width = 17
+)
+```
+
+<img src="man/figures/example-211-1.png" width="100%" style="display: block; margin: auto;" />
+
+### Two independent variables with separate mechanisms
+
+A causal diagram with two independent variables, each operating through
+its own mechanism, converging on a single outcome. A “+” sign indicates
+that both mechanisms are necessary.
+
+``` r
+causal_plot(
+  type = "221",
+  labels = c(
+    "Economic shocks",
+    "Political grievances",
+    "Resource competition",
+    "Identity mobilization",
+    "Civil conflict onset"
+  ),
+  text_size = 4,
+  wrap_width = 17
+)
+```
+
+<img src="man/figures/example-221-1.png" width="100%" style="display: block; margin: auto;" />
+
+### Two independent variables with two-step separate mechanisms
+
+A causal diagram with two independent variables, each going through two
+sequential mechanism steps, before converging on a single outcome.
+
+``` r
+causal_plot(
+  type = "2221",
+  labels = c(
+    "Economic shocks",
+    "Political grievances",
+    "Market disruption",
+    "Elite fragmentation",
+    "Resource competition",
+    "Identity mobilization",
+    "Civil conflict onset"
+  ),
+  text_size = 4,
+  wrap_width = 17
+)
+```
+
+<img src="man/figures/example-2221-1.png" width="100%" style="display: block; margin: auto;" />
+
+## Typology
+
+In addition to causal diagrams, `causalplot` also includes a
+`typology()` function for creating 2x2 descriptive or explanatory
+typologies. The function produces a single box divided into four
+quadrants by dashed lines, with double-headed axis arrows, axis labels,
+endpoint values, and type labels. The example below replicates the
+typology in Martin, Piccolino, and Speight (2021).
+
+``` r
+typology(
+  type_labels = c(
+    "Predation",
+    "Benevolent warlordism",
+    "State capture",
+    "Rebels-into-statesmen"
+  ),
+  x_axis_label = "Strength of local-level ties",
+  y_axis_label = "Strength of national-level ties",
+  x_axis_values = c("Weak", "Strong"),
+  y_axis_values = c("Weak", "Strong"),
+  text_size = 4,
+  axis_text_size = 4
+)
+```
+
+<img src="man/figures/example-typology-1.png" width="100%" style="display: block; margin: auto;" />
+
 ## Save your plot
 
 `causalplot` uses `ggplot2` to generate the plots, so they can be saved
@@ -250,8 +359,32 @@ ggplot2::ggsave("man/figures/causal_plot.png", height = 5, width = 12)
 
 ## Citation
 
-Did you like the package? No need to cite it, but please add a note to
-your figure with the following text:
+Did you like the package? No need to cite it, but please add a footnote
+somewhere with the following text:
 
 > “Generated using the causalplot R package created by Sebastian van
 > Baalen.”
+
+## References
+
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+
+<div id="ref-hedstrom2010" class="csl-entry">
+
+Hedström, Peter, and Petri Ylikoski. 2010. “Causal Mechanisms in the
+Social Sciences.” *Annual Review of Sociology* 36: 49–67.
+<https://doi.org/10.1146/annurev.soc.012809.102632>.
+
+</div>
+
+<div id="ref-martinetal2021" class="csl-entry">
+
+Martin, Philip A., Giulia Piccolino, and Jeremy S. Speight. 2021.
+“Ex-Rebel Authority After Civil War: Theory and Evidence from Côte
+d’ivoire.” *Comparative Politics* 53 (2): 209–32.
+<https://www.jstor.org/stable/26976051>.
+
+</div>
+
+</div>

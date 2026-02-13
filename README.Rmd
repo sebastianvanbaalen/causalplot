@@ -1,5 +1,6 @@
 ---
 output: github_document
+bibliography: references.bib
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -19,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/) [![Stars](https://img.shields.io/github/stars/sebastianvanbaalen/causalplot)](https://github.com/sebastianvanbaalen/causalplot)
 
 # causalplot <a href="#"><img src="man/figures/logo.png" align="right" height="200" style="margin-left:5px; margin-bottom:5px;"/></a>
 
@@ -38,9 +39,19 @@ You can install the development version of `causalplot` from Github with:
 # devtools::install_github("sebastianvanbaalen/causalplot")
 ```
 
+## What's new?
+
+The latest version of `causalplot` includes several new features and fixes:
+
+-   Reduction of white space around the plots.
+
+-   Support for causal plots with two independent variables (templates `211`, `221`, and `2221`).
+
+-   Support for the standard 2x2 descriptive or explanatory typology.
+
 ## Bug-reports and suggestions?
 
-Are you missing a template or is something not running as it should? Submit a report through Github or email Sebastian at sebastian.van-baalen\@pcr.uu.se.
+Are you missing a template or is something not running as it should? Make a new issue in the Github repository or email Sebastian at sebastian.van-baalen\@pcr.uu.se.
 
 ## Example
 
@@ -69,7 +80,7 @@ A simple one-step causal mechanism plot with an independent variable, dependent 
 ```{r example-111}
 causal_plot(
   type = "111", # Chose the plot template
-  text_size = 3, # Set the text size
+  text_size = 5, # Set the text size
   box_ratio = 1 # Increase the box height
 )
 ```
@@ -162,7 +173,7 @@ causal_plot(
 
 ### The classic "bathtub" causal mechanism
 
-The classic "bathtub" visualization of a causal relationship (for instance, discussed [here](https://doi.org/10.1146/annurev.soc.012809.102632)) with a direct macro-level arrow and a two-step causal mechanism.
+The classic "bathtub" visualization of a causal relationship as discussed in @hedstrom2010, with a direct macro-level arrow and a two-step causal mechanism.
 
 ```{r example-bathtub}
 causal_plot(
@@ -207,6 +218,85 @@ causal_plot(
 )
 ```
 
+### Two independent variables with shared mechanism
+
+A causal diagram with two independent variables that converge on a shared causal mechanism before producing a single outcome. A "+" sign indicates that both IVs are necessary.
+
+```{r example-211}
+causal_plot(
+  type = "211",
+  labels = c(
+    "Resource scarcity",
+    "Civilian dependence",
+    "Institutional adaptation",
+    "Responsive governance"
+  ),
+  text_size = 4,
+  wrap_width = 17
+)
+```
+
+### Two independent variables with separate mechanisms
+
+A causal diagram with two independent variables, each operating through its own mechanism, converging on a single outcome. A "+" sign indicates that both mechanisms are necessary.
+
+```{r example-221}
+causal_plot(
+  type = "221",
+  labels = c(
+    "Economic shocks",
+    "Political grievances",
+    "Resource competition",
+    "Identity mobilization",
+    "Civil conflict onset"
+  ),
+  text_size = 4,
+  wrap_width = 17
+)
+```
+
+### Two independent variables with two-step separate mechanisms
+
+A causal diagram with two independent variables, each going through two sequential mechanism steps, before converging on a single outcome.
+
+```{r example-2221}
+causal_plot(
+  type = "2221",
+  labels = c(
+    "Economic shocks",
+    "Political grievances",
+    "Market disruption",
+    "Elite fragmentation",
+    "Resource competition",
+    "Identity mobilization",
+    "Civil conflict onset"
+  ),
+  text_size = 4,
+  wrap_width = 17
+)
+```
+
+## Typology
+
+In addition to causal diagrams, `causalplot` also includes a `typology()` function for creating 2x2 descriptive or explanatory typologies. The function produces a single box divided into four quadrants by dashed lines, with double-headed axis arrows, axis labels, endpoint values, and type labels. The example below replicates the typology in @martinetal2021.
+
+```{r example-typology}
+typology(
+  type_labels = c(
+    "Predation",
+    "Benevolent warlordism",
+    "State capture",
+    "Rebels-into-statesmen"
+  ),
+  x_axis_label = "Strength of local-level ties",
+  y_axis_label = "Strength of national-level ties",
+  x_axis_values = c("Weak", "Strong"),
+  y_axis_values = c("Weak", "Strong"),
+  text_size = 4,
+  axis_text_size = 4
+)
+```
+
 ## Save your plot
 
 `causalplot` uses `ggplot2` to generate the plots, so they can be saved using the `ggsave` command.
@@ -217,6 +307,8 @@ ggplot2::ggsave("man/figures/causal_plot.png", height = 5, width = 12)
 
 ## Citation
 
-Did you like the package? No need to cite it, but please add a note to your figure with the following text:
+Did you like the package? No need to cite it, but please add a footnote somewhere with the following text:
 
 > "Generated using the causalplot R package created by Sebastian van Baalen."
+
+## References

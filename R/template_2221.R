@@ -1,12 +1,6 @@
-# Internal: template implementation for "111_confounder"
-# Based on "111" but adds a confounder box above the middle mechanism box,
-# with arrows from the confounder to the IV and DV boxes.
-#
-# Layout:
-#      Confounder
-#       /      \
-#     IV  ->  Mechanism  ->  DV
-.causal_template_111_confounder <- function(
+# Internal: template implementation for "2221"
+# Layout: [IV1_top, IV2_bottom] -> [M1_top, M1_bottom] -> [M2_top, M2_bottom] -> DV(center)
+.causal_template_2221 <- function(
     labels,
     fill_variables,
     fill_mechanisms,
@@ -21,7 +15,6 @@
     xlim,
     ylim
 ) {
-  # Corner radius handling
   if (inherits(corner_radius, "unit")) {
     radius_unit <- corner_radius
   } else if (is.numeric(corner_radius) && length(corner_radius) == 1) {
@@ -30,7 +23,6 @@
     stop("`corner_radius` must be a grid::unit() or a single numeric (cm).", call. = FALSE)
   }
 
-  # Wrap labels to <= 3 lines; use <br> for ggtext
   wrap3_or_error <- function(x, width, max_lines = 3, idx = NA_integer_) {
     lines <- strwrap(x, width = width)
     if (length(lines) == 0) lines <- ""
@@ -46,20 +38,17 @@
     paste(lines, collapse = "<br>")
   }
 
-  # Box geometry
   # Index map:
-  # 1 = IV, 2 = Mechanism, 3 = DV, 4 = Confounder (above mechanism)
-  # Main row: ymin=2.4, ymax=3.6
-  # Gap to match moderator: 0.8 (3.6 -> 4.4)
+  # 1=IV1_top, 2=IV2_bottom, 3=M1_top, 4=M1_bottom,
+  # 5=M2_top, 6=M2_bottom, 7=DV_center
   boxes <- data.frame(
-    xmin  = c(1, 5, 9, 5),
-    xmax  = c(3, 7, 11, 7),
-    ymin  = c(2.4, 2.4, 2.4, 4.4),
-    ymax  = c(3.6, 3.6, 3.6, 5.6),
+    xmin = c(1,  1,  4,  4,  7,  7, 10),
+    xmax = c(3,  3,  6,  6,  9,  9, 12),
+    ymin = c(3.8, 1.0, 3.8, 1.0, 3.8, 1.0, 2.4),
+    ymax = c(5.0, 2.2, 5.0, 2.2, 5.0, 2.2, 3.6),
     label = labels,
     stringsAsFactors = FALSE
   )
-
   boxes <- .add_box_centers(boxes)
 
   # Auto-compute limits if not supplied
@@ -76,69 +65,59 @@
   )
 
   # Arrows:
-  # IV -> Mechanism -> DV (straight)
-  # Confounder -> IV and Confounder -> DV (diagonal to box corners)
+  # All 2->2 transitions are straight parallel (center-to-center)
+  # Final 2->1 uses converge convention (right-center to DV corners)
   arrows <- rbind(
-    data.frame(
+    data.frame( # IV1_top -> M1_top (straight)
       x = boxes$xmax[1], y = boxes$y[1],
-      xend = boxes$xmin[2], yend = boxes$y[2]
-    ),
-    data.frame(
-      x = boxes$xmax[2], y = boxes$y[2],
       xend = boxes$xmin[3], yend = boxes$y[3]
     ),
-    # Confounder (bottom-left corner) -> IV (top-right corner)
-    data.frame(
-      x = boxes$xmin[4], y = boxes$ymin[4],
-      xend = boxes$xmax[1], yend = boxes$ymax[1]
+    data.frame( # IV2_bottom -> M1_bottom (straight)
+      x = boxes$xmax[2], y = boxes$y[2],
+      xend = boxes$xmin[4], yend = boxes$y[4]
     ),
-    # Confounder (bottom-right corner) -> DV (top-left corner)
-    data.frame(
-      x = boxes$xmax[4], y = boxes$ymin[4],
-      xend = boxes$xmin[3], yend = boxes$ymax[3]
+    data.frame( # M1_top -> M2_top (straight)
+      x = boxes$xmax[3], y = boxes$y[3],
+      xend = boxes$xmin[5], yend = boxes$y[5]
+    ),
+    data.frame( # M1_bottom -> M2_bottom (straight)
+      x = boxes$xmax[4], y = boxes$y[4],
+      xend = boxes$xmin[6], yend = boxes$y[6]
+    ),
+    data.frame( # M2_top right-center -> DV top-left corner
+      x = boxes$xmax[5], y = boxes$y[5],
+      xend = boxes$xmin[7], yend = boxes$ymax[7]
+    ),
+    data.frame( # M2_bottom right-center -> DV bottom-left corner
+      x = boxes$xmax[6], y = boxes$y[6],
+      xend = boxes$xmin[7], yend = boxes$ymin[7]
     )
   )
 
-  # Fills:
-  # Variables: IV, DV, Confounder (1,3,4)
-  # Mechanism: middle box (2)
+  # Fills: IV1, IV2, DV = variables; all mechanisms = mechanisms
   fills <- rep(fill_mechanisms, nrow(boxes))
-  fills[c(1, 3, 4)] <- fill_variables
+  fills[c(1, 2, 7)] <- fill_variables
 
   poly_df <- .boxes_to_poly_df(boxes = boxes, fills = fills)
 
   ggplot2::ggplot() +
     ggforce::geom_shape(
       data = poly_df,
-      ggplot2::aes(
-        x = .data$x,
-        y = .data$y,
-        group = .data$id,
-        fill = .data$fill
-      ),
+      ggplot2::aes(x = .data$x, y = .data$y, group = .data$id, fill = .data$fill),
       radius = radius_unit,
       colour = NA
     ) +
     ggplot2::scale_fill_identity() +
     ggplot2::geom_segment(
       data = arrows,
-      ggplot2::aes(
-        x = .data$x,
-        y = .data$y,
-        xend = .data$xend,
-        yend = .data$yend
-      ),
+      ggplot2::aes(x = .data$x, y = .data$y, xend = .data$xend, yend = .data$yend),
       arrow = grid::arrow(type = "closed", ends = "last", length = arrow_length),
       linewidth = arrow_linewidth,
       lineend = "round"
     ) +
     ggtext::geom_richtext(
       data = boxes,
-      ggplot2::aes(
-        x = .data$x,
-        y = .data$y,
-        label = .data$label_display
-      ),
+      ggplot2::aes(x = .data$x, y = .data$y, label = .data$label_display),
       size = text_size,
       family = font,
       colour = text_color,

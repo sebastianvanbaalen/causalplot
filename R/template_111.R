@@ -36,6 +36,13 @@
 
   boxes <- .add_box_centers(boxes)
 
+  # Auto-compute limits if not supplied
+  if (is.null(xlim) || is.null(ylim)) {
+    auto <- .compute_default_limits(boxes)
+    if (is.null(xlim)) xlim <- auto$xlim
+    if (is.null(ylim)) ylim <- auto$ylim
+  }
+
   # 2) Wrap labels to <= 3 lines, ERROR if longer
   # IMPORTANT: ggtext treats "\n" as whitespace; use "<br>" for line breaks.
   wrap3_or_error <- function(x, width, max_lines = 3, idx = NA_integer_) {
@@ -96,8 +103,8 @@
       label.color = NA,
       label.padding = grid::unit(rep(0, 4), "pt")
     ) +
-    ggplot2::scale_x_continuous(limits = xlim) +
-    ggplot2::scale_y_continuous(limits = ylim) +
+    ggplot2::scale_x_continuous(limits = xlim, expand = ggplot2::expansion(0)) +
+    ggplot2::scale_y_continuous(limits = ylim, expand = ggplot2::expansion(0)) +
     ggplot2::coord_fixed(ratio = box_ratio) +
     ggplot2::theme_void()
 }

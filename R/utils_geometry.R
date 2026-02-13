@@ -46,3 +46,10 @@
     stringsAsFactors = FALSE
   )
 }
+
+# Internal: compute tight axis limits from box coordinates + padding
+.compute_default_limits <- function(boxes, padding = 0.5) {
+  xlim <- c(min(boxes$xmin) - padding, max(boxes$xmax) + padding)
+  ylim <- c(min(boxes$ymin) - padding, max(boxes$ymax) + padding)
+  list(xlim = xlim, ylim = ylim)
+}

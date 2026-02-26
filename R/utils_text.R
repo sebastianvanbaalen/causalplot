@@ -9,7 +9,7 @@
 # Also returns a label_display that preserves your centering behavior:
 # - if the label is originally 1 line, we pad it to 2 lines (second line is " ")
 #   so it behaves like your original approach and can be nudged.
-.wrap_label_max_lines_or_error <- function(x, width, max_lines = 3, box_idx = NA_integer_) {
+.wrap_label_max_lines_or_error <- function(x, width, max_lines = 5, box_idx = NA_integer_) {
   lines <- strwrap(x, width = width)
   if (length(lines) == 0) lines <- ""
 
@@ -42,7 +42,7 @@
 .add_wrapped_labels_and_y <- function(
     boxes,
     wrap_width,
-    max_lines = 3,
+    max_lines = 5,
     one_line_vshift = -0.10,
     two_line_vshift = 0,
     three_line_vshift = 0

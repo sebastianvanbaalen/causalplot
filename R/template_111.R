@@ -45,7 +45,7 @@
 
   # 2) Wrap labels to <= 3 lines, ERROR if longer
   # IMPORTANT: ggtext treats "\n" as whitespace; use "<br>" for line breaks.
-  wrap3_or_error <- function(x, width, max_lines = 3, idx = NA_integer_) {
+  wrap3_or_error <- function(x, width, max_lines = 5, idx = NA_integer_) {
     lines <- strwrap(x, width = width)
     if (length(lines) == 0) lines <- ""
     if (length(lines) > max_lines) {

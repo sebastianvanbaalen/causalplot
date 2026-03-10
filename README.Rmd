@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/) [![Stars](https://img.shields.io/github/stars/sebastianvanbaalen/causalplot)](https://github.com/sebastianvanbaalen/causalplot)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/) [![Stars](https://img.shields.io/github/stars/sebastianvanbaalen/causalplot)](https://github.com/sebastianvanbaalen/causalplot) [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/causalplot)](https://cran.r-project.org/package=causalplot)
 
 # causalplot <a href="#"><img src="man/figures/logo.png" align="right" height="200" style="margin-left:5px; margin-bottom:5px;"/></a>
 
@@ -48,6 +48,8 @@ The latest version of `causalplot` includes several new features and fixes:
 -   Support for causal plots with two independent variables (templates `211`, `221`, and `2221`).
 
 -   Support for the standard 2x2 descriptive or explanatory typology.
+
+-   An embedded Shiny app that allows users to make plots without writing any code. Launch by typing `causalplot::run_app()` or visit <https://sebvanbaalen.shinyapps.io/causalplot>.
 
 ## Bug-reports and suggestions?
 
@@ -102,7 +104,7 @@ causal_plot(
 
 A three-step causal mechanism plot with an independent variable, dependent variable, and three causal process boxes.
 
-```{r example 11111}
+```{r example-11111}
 causal_plot(
   type = "11111",
   text_size = 4
@@ -226,10 +228,10 @@ A causal diagram with two independent variables that converge on a shared causal
 causal_plot(
   type = "211",
   labels = c(
-    "Resource scarcity",
-    "Civilian dependence",
-    "Institutional adaptation",
-    "Responsive governance"
+    "Independent variable 1",
+    "Independent variable 2",
+    "Shared causal mechanism",
+    "Dependent variable"
   ),
   text_size = 4,
   wrap_width = 17
@@ -244,11 +246,11 @@ A causal diagram with two independent variables, each operating through its own 
 causal_plot(
   type = "221",
   labels = c(
-    "Economic shocks",
-    "Political grievances",
-    "Resource competition",
-    "Identity mobilization",
-    "Civil conflict onset"
+    "Independent variable 1",
+    "Independent variable 2",
+    "Causal mechanism 1",
+    "Causal mechanism 2",
+    "Dependent variable"
   ),
   text_size = 4,
   wrap_width = 17
@@ -263,13 +265,13 @@ A causal diagram with two independent variables, each going through two sequenti
 causal_plot(
   type = "2221",
   labels = c(
-    "Economic shocks",
-    "Political grievances",
-    "Market disruption",
-    "Elite fragmentation",
-    "Resource competition",
-    "Identity mobilization",
-    "Civil conflict onset"
+    "Independent variable 1",
+    "Independent variable 2",
+    "Path 1: mechanism step 1",
+    "Path 2: mechanism step 1",
+    "Path 1: mechanism step 2",
+    "Path 2: mechanism step 2",
+    "Dependent variable"
   ),
   text_size = 4,
   wrap_width = 17

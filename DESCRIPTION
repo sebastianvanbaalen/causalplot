@@ -22,5 +22,8 @@ Imports:
     ggforce,
     ggplot2,
     ggtext
+Suggests:
+    shiny,
+    shinythemes
 URL: https://github.com/sebastianvanbaalen/causalplot
 BugReports: https://github.com/sebastianvanbaalen/causalplot/issues

@@ -4,4 +4,4 @@
   )
 }
 
-utils::globalVariables(c("x", "y", "id", "fill", "xend", "yend", "label_display"))
+utils::globalVariables(c("x", "y", "id", "fill", "xend", "yend", "label_display", ".data"))

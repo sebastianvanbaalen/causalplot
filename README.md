@@ -1,8 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![License: CC BY
-4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Stars](https://img.shields.io/github/stars/sebastianvanbaalen/causalplot)](https://github.com/sebastianvanbaalen/causalplot)
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/causalplot)](https://cran.r-project.org/package=causalplot)
 

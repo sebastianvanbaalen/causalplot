@@ -1,0 +1,9 @@
+Title: Causal Diagram Builder
+Version: 0.1
+Imports:
+    shiny,
+    shinythemes,
+    ggplot2,
+    causalplot
+Remotes:
+    sebastianvanbaalen/causalplot

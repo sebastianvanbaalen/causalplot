@@ -16,8 +16,8 @@
 #' - "221" : two IVs -> two parallel mechanisms -> DV (5 boxes)
 #' - "2221": two IVs -> two parallel mechanism steps -> DV (7 boxes)
 #'
-#' Labels are wrapped to a maximum of 3 lines. If a label would wrap to more than
-#' 3 lines (given `wrap_width`), an error is thrown.
+#' Labels are wrapped to a maximum of 5 lines. If a label would wrap to more than
+#' 5 lines (given `wrap_width`), an error is thrown.
 #'
 #' @param labels Character vector of labels. If NULL, defaults are used.
 #' @param type Character. Layout template.
@@ -36,6 +36,15 @@
 #'
 #' @return A ggplot object.
 #' @export
+#' @examples
+#' # Simple three-box causal diagram
+#' causal_plot(type = "111")
+#'
+#' # With custom labels
+#' causal_plot(
+#'   labels = c("Education", "Income", "Health"),
+#'   type = "111"
+#' )
 causal_plot <- function(
     labels = NULL,
     type = "1111",

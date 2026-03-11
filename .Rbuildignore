@@ -3,4 +3,5 @@
 ^README\.Rmd$
 ^\.claude$
 ^references\.bib$
+^cran-comments\.md$
 

@@ -4,7 +4,6 @@
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Stars](https://img.shields.io/github/stars/sebastianvanbaalen/causalplot)](https://github.com/sebastianvanbaalen/causalplot)
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/causalplot)](https://cran.r-project.org/package=causalplot)
 
 # causalplot <a href="#"><img src="man/figures/logo.png" align="right" height="200" style="margin-left:5px; margin-bottom:5px;"/></a>
 
@@ -24,12 +23,17 @@ color, box color, fonts, and captions.
 
 ## Installation
 
-You can install the development version of `causalplot` from Github
-with:
+Once published, you can install `causalplot` from CRAN with:
+
+``` r
+install.packages("causalplot")
+```
+
+Or install the development version from GitHub with:
 
 ``` r
 # install.packages("devtools")
-# devtools::install_github("sebastianvanbaalen/causalplot")
+devtools::install_github("sebastianvanbaalen/causalplot")
 ```
 
 ## What’s new?

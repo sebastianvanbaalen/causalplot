@@ -73,6 +73,16 @@ Supported templates:
 \item "2221": two IVs -> two parallel mechanism steps -> DV (7 boxes)
 }
 
-Labels are wrapped to a maximum of 3 lines. If a label would wrap to more than
-3 lines (given \code{wrap_width}), an error is thrown.
+Labels are wrapped to a maximum of 5 lines. If a label would wrap to more than
+5 lines (given \code{wrap_width}), an error is thrown.
+}
+\examples{
+# Simple three-box causal diagram
+causal_plot(type = "111")
+
+# With custom labels
+causal_plot(
+  labels = c("Education", "Income", "Health"),
+  type = "111"
+)
 }

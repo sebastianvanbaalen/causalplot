@@ -1,6 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/causalplot)](https://CRAN.R-project.org/package=causalplot)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/causalplot)](https://CRAN.R-project.org/package=causalplot)
+[![R-CMD-check](https://github.com/sebastianvanbaalen/causalplot/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sebastianvanbaalen/causalplot/actions/workflows/R-CMD-check.yaml)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Stars](https://img.shields.io/github/stars/sebastianvanbaalen/causalplot)](https://github.com/sebastianvanbaalen/causalplot)
@@ -21,9 +25,17 @@ variable and mechanism labels, and the package produces a causal plot.
 The package also allows for additional customization in terms of text
 color, box color, fonts, and captions.
 
+There are a number of other R packages that allow users to create causal
+plots, including [`ggdag`](https://r-causal.github.io/ggdag/),
+[`caugi`](https://cran.r-project.org/web/packages/caugi/vignettes/visualization.html),
+and
+[DiagrammeR](https://www.erikigelstrom.com/articles/causal-graphs-in-r-with-diagrammer/).
+These packages are more powerful and useful for complex causal mapping,
+yet lack the space required for clear mechanism-based causal diagrams.
+
 ## Installation
 
-Once published, you can install `causalplot` from CRAN with:
+You can install `causalplot` from CRAN with:
 
 ``` r
 install.packages("causalplot")

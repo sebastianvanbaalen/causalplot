@@ -29,7 +29,7 @@ There are a number of other R packages that allow users to create causal
 plots, including [`ggdag`](https://r-causal.github.io/ggdag/),
 [`caugi`](https://cran.r-project.org/web/packages/caugi/vignettes/visualization.html),
 and
-[DiagrammeR](https://www.erikigelstrom.com/articles/causal-graphs-in-r-with-diagrammer/).
+[`DiagrammeR`](https://www.erikigelstrom.com/articles/causal-graphs-in-r-with-diagrammer/).
 These packages are more powerful and useful for complex causal mapping,
 yet lack the space required for clear mechanism-based causal diagrams.
 

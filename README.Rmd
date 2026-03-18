@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 
 Tired of spending endless time customizing a causal process graph in Word or trying to decipher the inner workings of the TikZ package in LaTeX? The goal of `causalplot` is to create publication-ready causal process plots using a simple convenience function that demands almost nothing of the user and lets you focus your attention on what actually matters—the theorizing. Users chose between templates and add their own variable and mechanism labels, and the package produces a causal plot. The package also allows for additional customization in terms of text color, box color, fonts, and captions.
 
-There are a number of other R packages that allow users to create causal plots, including [`ggdag`](https://r-causal.github.io/ggdag/), [`caugi`](https://cran.r-project.org/web/packages/caugi/vignettes/visualization.html), and [DiagrammeR](https://www.erikigelstrom.com/articles/causal-graphs-in-r-with-diagrammer/). These packages are more powerful and useful for complex causal mapping, yet lack the space required for clear mechanism-based causal diagrams.
+There are a number of other R packages that allow users to create causal plots, including [`ggdag`](https://r-causal.github.io/ggdag/), [`caugi`](https://cran.r-project.org/web/packages/caugi/vignettes/visualization.html), and [`DiagrammeR`](https://www.erikigelstrom.com/articles/causal-graphs-in-r-with-diagrammer/). These packages are more powerful and useful for complex causal mapping, yet lack the space required for clear mechanism-based causal diagrams.
 
 ## Installation
 

@@ -4,6 +4,7 @@
 #'
 #' Supported templates:
 #' - "111" : IV -> mech -> DV (3 boxes)
+#' - "121" : IV -> [mech_top, mech_bottom] -> DV (4 boxes)
 #' - "1111": IV -> mech1 -> mech2 -> DV (4 boxes)
 #' - "11111": IV -> mech1 -> mech2 -> mech3 -> DV (4 boxes)
 #' - "1121": IV -> one box -> two boxes -> DV (5 boxes)
@@ -65,7 +66,7 @@ causal_plot <- function(
     stop("`type` must be a single string (e.g., '1111').", call. = FALSE)
   }
 
-  supported <- c("111", "1111", "1121", "1211", "1221", "bathtub", "11111", "111_moderator", "111_confounder", "211", "221", "2221")
+  supported <- c("111", "121", "1111", "1121", "1211", "1221", "bathtub", "11111", "111_moderator", "111_confounder", "211", "221", "2221")
   if (!type %in% supported) {
     stop(
       sprintf(
@@ -93,6 +94,12 @@ causal_plot <- function(
       "111" = c(
         "Independent variable",
         "Causal mechanism",
+        "Dependent variable"
+      ),
+      "121" = c(
+        "Independent variable",
+        "Causal mechanism 1",
+        "Causal mechanism 2",
         "Dependent variable"
       ),
       "11111" = c(
@@ -170,6 +177,7 @@ causal_plot <- function(
   required_n <- switch(
     type,
     "111" = 3L,
+    "121" = 4L,
     "1111" = 4L,
     "11111" = 5L,
     "1121" = 5L,
@@ -193,6 +201,24 @@ causal_plot <- function(
   # Dispatch
   if (type == "111") {
     return(.causal_template_111(
+      labels = labels,
+      fill_variables = fill_variables,
+      fill_mechanisms = fill_mechanisms,
+      corner_radius = corner_radius,
+      font = font,
+      text_size = text_size,
+      text_color = text_color,
+      wrap_width = wrap_width,
+      arrow_length = arrow_length,
+      arrow_linewidth = arrow_linewidth,
+      box_ratio = box_ratio,
+      xlim = xlim,
+      ylim = ylim
+    ))
+  }
+
+  if (type == "121") {
+    return(.causal_template_121(
       labels = labels,
       fill_variables = fill_variables,
       fill_mechanisms = fill_mechanisms,

@@ -116,6 +116,27 @@ causal_plot(
 
 <img src="man/figures/example-111-1.png" width="100%" style="display: block; margin: auto;" />
 
+### One-step dual-pathway causal mechanism
+
+A causal mechanism plot with an independent variable, dependent
+variable, and two parallel causal mechanism boxes.
+
+``` r
+causal_plot(
+  type = "121",
+  labels = c(
+    "Independent variable",
+    "Causal mechanism 1",
+    "Causal mechanism 2",
+    "Dependent variable"
+  ),
+  text_size = 4,
+  wrap_width = 17
+)
+```
+
+<img src="man/figures/example-121-1.png" width="100%" style="display: block; margin: auto;" />
+
 ### Two-step causal mechanism
 
 A two-step causal mechanism plot with an independent variable, dependent

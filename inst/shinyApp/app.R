@@ -15,6 +15,12 @@ causal_fields <- list(
     "Causal mechanism",
     "Dependent variable"
   ),
+  "121" = c(
+    "Independent variable",
+    "Causal mechanism 1",
+    "Causal mechanism 2",
+    "Dependent variable"
+  ),
   "1111" = c(
     "Independent variable",
     "Causal mechanism step 1",
@@ -103,6 +109,7 @@ typology_fields <- list(
 # Template display names for the dropdown
 template_choices <- c(
   "111  \u2013 One-step mechanism (3 boxes)"          = "111",
+  "121  \u2013 One-step dual pathway (4 boxes)"       = "121",
   "1111 \u2013 Two-step mechanism (4 boxes)"           = "1111",
   "11111 \u2013 Three-step mechanism (5 boxes)"        = "11111",
   "1121 \u2013 Dual pathway, joint first step (5)"     = "1121",

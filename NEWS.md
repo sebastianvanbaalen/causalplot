@@ -1,3 +1,7 @@
+# causalplot 0.2.2
+
+* Add `121` template: one IV, two parallel mechanisms, one DV.
+
 # causalplot 0.2.1
 
 * Prepare for CRAN submission.

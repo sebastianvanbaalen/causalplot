@@ -1,7 +1,7 @@
 Package: causalplot
 Type: Package
 Title: Create Publication-Ready Causal Diagrams
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: c(
   person(given = "Sebastian", family = "van Baalen",
   email = "sebastian.van-baalen@pcr.uu.se",

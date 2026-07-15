@@ -60,11 +60,14 @@ Draw a simple causal diagram using ggplot2, with rounded boxes and arrows.
 Supported templates:
 \itemize{
 \item "111" : IV -> mech -> DV (3 boxes)
+\item "121" : IV -> \link{mech_top, mech_bottom} -> DV (4 boxes)
+\item "131" : IV -> \link{mech_top, mech_mid, mech_bottom} -> DV (5 boxes)
 \item "1111": IV -> mech1 -> mech2 -> DV (4 boxes)
 \item "11111": IV -> mech1 -> mech2 -> mech3 -> DV (4 boxes)
 \item "1121": IV -> one box -> two boxes -> DV (5 boxes)
 \item "1211": IV (center) -> two boxes -> one box -> DV (5 boxes)
 \item "1221": IV (center) -> two parallel paths -> DV (center) (6 boxes)
+\item "1331": IV (center) -> three parallel paths -> DV (center) (8 boxes)
 \item "bathtub": like "1221" but only bottom path + dashed direct IV->DV (4 boxes)
 \item "111_moderator": like "111" but with a moderator variable
 \item "111_confounder": like "111" but with a confounder variable

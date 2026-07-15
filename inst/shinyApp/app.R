@@ -21,6 +21,13 @@ causal_fields <- list(
     "Causal mechanism 2",
     "Dependent variable"
   ),
+  "131" = c(
+    "Independent variable",
+    "Causal mechanism 1",
+    "Causal mechanism 2",
+    "Causal mechanism 3",
+    "Dependent variable"
+  ),
   "1111" = c(
     "Independent variable",
     "Causal mechanism step 1",
@@ -54,6 +61,16 @@ causal_fields <- list(
     "Path 2: mechanism step 1",
     "Path 1: mechanism step 2",
     "Path 2: mechanism step 2",
+    "Dependent variable"
+  ),
+  "1331" = c(
+    "Independent variable",
+    "Path 1: mechanism step 1",
+    "Path 2: mechanism step 1",
+    "Path 3: mechanism step 1",
+    "Path 1: mechanism step 2",
+    "Path 2: mechanism step 2",
+    "Path 3: mechanism step 2",
     "Dependent variable"
   ),
   "bathtub" = c(
@@ -110,11 +127,13 @@ typology_fields <- list(
 template_choices <- c(
   "111  \u2013 One-step mechanism (3 boxes)"          = "111",
   "121  \u2013 One-step dual pathway (4 boxes)"       = "121",
+  "131  \u2013 One-step triple pathway (5 boxes)"     = "131",
   "1111 \u2013 Two-step mechanism (4 boxes)"           = "1111",
   "11111 \u2013 Three-step mechanism (5 boxes)"        = "11111",
   "1121 \u2013 Dual pathway, joint first step (5)"     = "1121",
   "1211 \u2013 Dual pathway, joint second step (5)"    = "1211",
   "1221 \u2013 Full dual pathway (6 boxes)"            = "1221",
+  "1331 \u2013 Full triple pathway (8 boxes)"          = "1331",
   "bathtub \u2013 Classic bathtub model (4 boxes)"     = "bathtub",
   "111 + moderator (4 boxes)"                          = "111_moderator",
   "111 + confounder (4 boxes)"                         = "111_confounder",

@@ -5,11 +5,13 @@
 #' Supported templates:
 #' - "111" : IV -> mech -> DV (3 boxes)
 #' - "121" : IV -> [mech_top, mech_bottom] -> DV (4 boxes)
+#' - "131" : IV -> [mech_top, mech_mid, mech_bottom] -> DV (5 boxes)
 #' - "1111": IV -> mech1 -> mech2 -> DV (4 boxes)
 #' - "11111": IV -> mech1 -> mech2 -> mech3 -> DV (4 boxes)
 #' - "1121": IV -> one box -> two boxes -> DV (5 boxes)
 #' - "1211": IV (center) -> two boxes -> one box -> DV (5 boxes)
 #' - "1221": IV (center) -> two parallel paths -> DV (center) (6 boxes)
+#' - "1331": IV (center) -> three parallel paths -> DV (center) (8 boxes)
 #' - "bathtub": like "1221" but only bottom path + dashed direct IV->DV (4 boxes)
 #' - "111_moderator": like "111" but with a moderator variable
 #' - "111_confounder": like "111" but with a confounder variable
@@ -66,7 +68,7 @@ causal_plot <- function(
     stop("`type` must be a single string (e.g., '1111').", call. = FALSE)
   }
 
-  supported <- c("111", "121", "1111", "1121", "1211", "1221", "bathtub", "11111", "111_moderator", "111_confounder", "211", "221", "2221")
+  supported <- c("111", "121", "131", "1111", "1121", "1211", "1221", "1331", "bathtub", "11111", "111_moderator", "111_confounder", "211", "221", "2221")
   if (!type %in% supported) {
     stop(
       sprintf(
@@ -102,6 +104,13 @@ causal_plot <- function(
         "Causal mechanism 2",
         "Dependent variable"
       ),
+      "131" = c(
+        "Independent variable",
+        "Causal mechanism 1",
+        "Causal mechanism 2",
+        "Causal mechanism 3",
+        "Dependent variable"
+      ),
       "11111" = c(
         "Independent variable",
         "Mechanism step 1",
@@ -129,6 +138,16 @@ causal_plot <- function(
         "Path 2: mechanism step 1",
         "Path 1: mechanism step 2",
         "Path 2: mechanism step 2",
+        "Dependent variable"
+      ),
+      "1331" = c(
+        "Independent variable",
+        "Path 1: mechanism step 1",
+        "Path 2: mechanism step 1",
+        "Path 3: mechanism step 1",
+        "Path 1: mechanism step 2",
+        "Path 2: mechanism step 2",
+        "Path 3: mechanism step 2",
         "Dependent variable"
       ),
       "bathtub" = c(
@@ -178,11 +197,13 @@ causal_plot <- function(
     type,
     "111" = 3L,
     "121" = 4L,
+    "131" = 5L,
     "1111" = 4L,
     "11111" = 5L,
     "1121" = 5L,
     "1211" = 5L,
     "1221" = 6L,
+    "1331" = 8L,
     "bathtub" = 4L,
     "111_moderator" = 4L,
     "111_confounder" = 4L,
@@ -219,6 +240,24 @@ causal_plot <- function(
 
   if (type == "121") {
     return(.causal_template_121(
+      labels = labels,
+      fill_variables = fill_variables,
+      fill_mechanisms = fill_mechanisms,
+      corner_radius = corner_radius,
+      font = font,
+      text_size = text_size,
+      text_color = text_color,
+      wrap_width = wrap_width,
+      arrow_length = arrow_length,
+      arrow_linewidth = arrow_linewidth,
+      box_ratio = box_ratio,
+      xlim = xlim,
+      ylim = ylim
+    ))
+  }
+
+  if (type == "131") {
+    return(.causal_template_131(
       labels = labels,
       fill_variables = fill_variables,
       fill_mechanisms = fill_mechanisms,
@@ -309,6 +348,24 @@ causal_plot <- function(
 
   if (type == "1221") {
     return(.causal_template_1221(
+      labels = labels,
+      fill_variables = fill_variables,
+      fill_mechanisms = fill_mechanisms,
+      corner_radius = corner_radius,
+      font = font,
+      text_size = text_size,
+      text_color = text_color,
+      wrap_width = wrap_width,
+      arrow_length = arrow_length,
+      arrow_linewidth = arrow_linewidth,
+      box_ratio = box_ratio,
+      xlim = xlim,
+      ylim = ylim
+    ))
+  }
+
+  if (type == "1331") {
+    return(.causal_template_1331(
       labels = labels,
       fill_variables = fill_variables,
       fill_mechanisms = fill_mechanisms,

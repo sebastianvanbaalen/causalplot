@@ -51,6 +51,8 @@ devtools::install_github("sebastianvanbaalen/causalplot")
 
 The latest version of `causalplot` includes several new features and fixes:
 
+-   New triple-pathway templates `131` (one step) and `1331` (two steps).
+
 -   Reduction of white space around the plots.
 
 -   Support for causal plots with two independent variables (templates `211`, `221`, and `2221`).
@@ -113,6 +115,25 @@ causal_plot(
 )
 ```
 
+### One-step triple-pathway causal mechanism
+
+A causal mechanism plot with an independent variable, dependent variable, and three parallel causal mechanism boxes.
+
+```{r example-131}
+causal_plot(
+  type = "131",
+  labels = c(
+    "Independent variable",
+    "Causal mechanism 1",
+    "Causal mechanism 2",
+    "Causal mechanism 3",
+    "Dependent variable"
+  ),
+  text_size = 4,
+  wrap_width = 17
+)
+```
+
 ### Two-step causal mechanism
 
 A two-step causal mechanism plot with an independent variable, dependent variable, and two causal process boxes.
@@ -158,6 +179,28 @@ causal_plot(
   fill_variables = "black",
   text_color = "white",
   font = "Times" # Set the font
+)
+```
+
+### Triple-pathway causal mechanism
+
+A two-step causal mechanism plot with an independent variable, dependent variable, and three separate causal pathways.
+
+```{r example-1331}
+causal_plot(
+  type = "1331",
+  labels = c(
+    "Independent variable",
+    "Path 1: mechanism step 1",
+    "Path 2: mechanism step 1",
+    "Path 3: mechanism step 1",
+    "Path 1: mechanism step 2",
+    "Path 2: mechanism step 2",
+    "Path 3: mechanism step 2",
+    "Dependent variable"
+  ),
+  wrap_width = 17,
+  text_size = 4
 )
 ```
 

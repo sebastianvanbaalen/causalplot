@@ -1,3 +1,8 @@
+# causalplot 0.2.3
+
+* Add `131` template: one IV, three parallel mechanisms, one DV.
+* Add `1331` template: one IV, three parallel two-step mechanisms, one DV.
+
 # causalplot 0.2.2
 
 * Add `121` template: one IV, two parallel mechanisms, one DV.

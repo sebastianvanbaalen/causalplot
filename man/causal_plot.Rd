@@ -60,8 +60,8 @@ Draw a simple causal diagram using ggplot2, with rounded boxes and arrows.
 Supported templates:
 \itemize{
 \item "111" : IV -> mech -> DV (3 boxes)
-\item "121" : IV -> \link{mech_top, mech_bottom} -> DV (4 boxes)
-\item "131" : IV -> \link{mech_top, mech_mid, mech_bottom} -> DV (5 boxes)
+\item "121" : IV -> [mech_top, mech_bottom] -> DV (4 boxes)
+\item "131" : IV -> [mech_top, mech_mid, mech_bottom] -> DV (5 boxes)
 \item "1111": IV -> mech1 -> mech2 -> DV (4 boxes)
 \item "11111": IV -> mech1 -> mech2 -> mech3 -> DV (4 boxes)
 \item "1121": IV -> one box -> two boxes -> DV (5 boxes)

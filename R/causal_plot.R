@@ -4,8 +4,8 @@
 #'
 #' Supported templates:
 #' - "111" : IV -> mech -> DV (3 boxes)
-#' - "121" : IV -> [mech_top, mech_bottom] -> DV (4 boxes)
-#' - "131" : IV -> [mech_top, mech_mid, mech_bottom] -> DV (5 boxes)
+#' - "121" : IV -> \[mech_top, mech_bottom\] -> DV (4 boxes)
+#' - "131" : IV -> \[mech_top, mech_mid, mech_bottom\] -> DV (5 boxes)
 #' - "1111": IV -> mech1 -> mech2 -> DV (4 boxes)
 #' - "11111": IV -> mech1 -> mech2 -> mech3 -> DV (4 boxes)
 #' - "1121": IV -> one box -> two boxes -> DV (5 boxes)
